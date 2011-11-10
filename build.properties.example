@@ -1,0 +1,8 @@
+build.test.tomcat.url = http://192.168.1.199:8080/manager
+build.test.tomcat.path = /crks-service-test
+build.test.tomcat.user = username
+build.test.tomcat.pass = password
+build.live.tomcat.url = http://192.168.1.199:8080/manager
+build.live.tomcat.path = /crks-service
+build.live.tomcat.user = username
+build.live.tomcat.pass = password

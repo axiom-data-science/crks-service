@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.axiomalaska.crks.vo.LayerSubtype" table="layer_subtype" schema="crks">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="sequence">
+                <param name="sequence">layer_subtype_id_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="layerType" class="com.axiomalaska.crks.vo.LayerType" fetch="select">
+            <column name="layer_type_id" />
+        </many-to-one>
+        <property name="label" type="string">
+            <column name="label" length="500" />
+        </property>
+        <property name="ZIndex" type="java.lang.Integer">
+            <column name="z_index" />
+        </property>
+        <set name="layers" inverse="true">
+            <key>
+                <column name="layer_subtype_id" />
+            </key>
+            <one-to-many class="com.axiomalaska.crks.vo.Layer" />
+        </set>
+    </class>
+</hibernate-mapping>

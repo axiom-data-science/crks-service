@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<!--
+Copy to src/main/resources/hibernate.cfg.xml and update config (url, username, password)
+-->
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.c3p0.acquire_increment">1</property>
+        <property name="hibernate.c3p0.idle_test_period">100</property>
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.max_statements">0</property>
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="hibernate.c3p0.timeout">100</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.password">PASSWORD</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1/crks</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.default_schema">crks</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.jdbc.batch_size">50</property>
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.use_sql_comments">true</property>
+        <mapping resource="com/axiomalaska/crks/vo/ParameterType.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/Tag.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/LayerTag.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/PortalLayerGroup.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/Module.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/ModelVariable.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/RasterTimeStrata.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/TagType.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/Portal.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/SupportedEpsg.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/Parameter.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/LayerSubtype.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/PortalModule.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/LayerGroup.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/Model.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/RasterElevationStrata.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/Layer.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/DataProvider.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/LayerType.hbm.xml" />
+        <mapping resource="com/axiomalaska/crks/vo/ModuleStickyLayerGroup.hbm.xml" />
+    </session-factory>
+</hibernate-configuration>

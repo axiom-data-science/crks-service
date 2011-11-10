@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.axiomalaska.crks.vo.SupportedEpsg" table="supported_epsg" schema="crks">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="sequence">
+                <param name="sequence">supported_epsg_id_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="ogcLayer" class="com.axiomalaska.crks.vo.OgcLayer" fetch="select">
+            <column name="ogc_layer_id" not-null="true" />
+        </many-to-one>
+        <property name="epsg" type="int">
+            <column name="epsg" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

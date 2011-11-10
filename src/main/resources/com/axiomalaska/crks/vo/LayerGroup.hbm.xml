@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.axiomalaska.crks.vo.LayerGroup" table="layer_group" schema="crks">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="sequence">
+                <param name="sequence">layer_group_id_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="module" class="com.axiomalaska.crks.vo.Module" fetch="select">
+            <column name="module_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="layerType" class="com.axiomalaska.crks.vo.LayerType" fetch="select">
+            <column name="layer_type_id" />
+        </many-to-one>
+        <property name="label" type="string">
+            <column name="label" length="512" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" />
+        </property>
+        <property name="metadataUrl" type="string">
+            <column name="metadata_url" length="512" />
+        </property>
+        <property name="startTimeUtc" type="timestamp">
+            <column name="start_time_utc" length="29" />
+        </property>
+        <property name="endTimeUtc" type="timestamp">
+            <column name="end_time_utc" length="29" />
+        </property>
+        <property name="minLng" type="java.lang.Double">
+            <column name="min_lng" precision="17" scale="17" />
+        </property>
+        <property name="minLat" type="java.lang.Double">
+            <column name="min_lat" precision="17" scale="17" />
+        </property>
+        <property name="maxLng" type="java.lang.Double">
+            <column name="max_lng" precision="17" scale="17" />
+        </property>
+        <property name="maxLat" type="java.lang.Double">
+            <column name="max_lat" precision="17" scale="17" />
+        </property>
+        <set name="portalLayerGroups" inverse="true">
+            <key>
+                <column name="layer_group_id" not-null="true" />
+            </key>
+            <one-to-many class="com.axiomalaska.crks.vo.PortalLayerGroup" />
+        </set>
+        <set name="moduleStickyLayerGroups" inverse="true">
+            <key>
+                <column name="layer_group_id" not-null="true" />
+            </key>
+            <one-to-many class="com.axiomalaska.crks.vo.ModuleStickyLayerGroup" />
+        </set>
+        <set name="layers" inverse="true">
+            <key>
+                <column name="layer_group_id" />
+            </key>
+            <one-to-many class="com.axiomalaska.crks.vo.Layer" />
+        </set>
+    </class>
+</hibernate-mapping>

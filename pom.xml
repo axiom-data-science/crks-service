@@ -1,0 +1,134 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.axiomalaska</groupId>
+  <artifactId>crks-service</artifactId>
+  <packaging>war</packaging>
+  <version>1.0</version>
+  <name>crks-service</name>
+  
+  <properties>
+  	<postgres-version>8.4-702.jdbc4</postgres-version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  	
+  </properties>
+
+  <licenses>
+    <license>
+      <name>BSD 2-Clause</name>
+      <url>http://www.opensource.org/licenses/bsd-license.php</url>
+    </license>
+  </licenses>
+
+  <dependencies>
+	<dependency>
+	    <groupId>joda-time</groupId>
+	    <artifactId>joda-time</artifactId>
+	    <version>1.6.2</version>
+	</dependency>       
+    
+	<dependency>
+      <groupId>postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${postgres-version}</version>
+	</dependency>  
+       
+	<dependency>
+	    <groupId>log4j</groupId>
+	    <artifactId>log4j</artifactId>
+	    <version>1.2.16</version>
+	</dependency>    
+	    
+    <!-- HIBERNATE -->
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-core</artifactId>
+		<version>3.3.2.GA</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-simple</artifactId>
+		<version>1.5.8</version>
+	</dependency>
+ 
+	<dependency>
+		<groupId>javassist</groupId>
+		<artifactId>javassist</artifactId>
+		<version>3.8.0.GA</version>
+	</dependency>    
+	     
+	<dependency>
+		<scope>provided</scope>		
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-tools</artifactId>
+	    <version>3.2.3.GA</version>
+	</dependency>		
+    <!-- //HIBERNATE -->   
+    
+	<dependency>
+	    <groupId>com.vividsolutions</groupId>
+	    <artifactId>jts</artifactId>
+	    <version>1.11</version>
+	</dependency>    
+	
+	<dependency>
+		<scope>provided</scope>
+		<groupId>javax.servlet</groupId>
+		<artifactId>servlet-api</artifactId>
+		<version>2.5</version>
+	</dependency>
+    
+    <!-- BLAZE DS -->
+	<dependency>
+	  <groupId>com.adobe.blazeds</groupId>
+	  <artifactId>blazeds-common</artifactId>
+	  <version>3.2.0.3978</version>
+	</dependency>
+	
+	<dependency>
+	  <groupId>com.adobe.blazeds</groupId>
+	  <artifactId>blazeds-core</artifactId>
+	  <version>3.2.0.3978</version>
+	</dependency>
+	
+	<dependency>
+	  <groupId>com.adobe.blazeds</groupId>
+	  <artifactId>blazeds-remoting</artifactId>
+	  <version>3.2.0.3978</version>
+	</dependency>
+    <!-- //BLAZE DS -->
+    	
+	<dependency>
+	    <groupId>dom4j</groupId>
+	    <artifactId>dom4j</artifactId>
+	    <version>1.6.1</version>
+	</dependency>
+  
+	<dependency>
+	    <groupId>jaxen</groupId>
+	    <artifactId>jaxen</artifactId>
+	    <version>1.1.1</version>
+	</dependency>      	
+    	
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>3.8.1</version>
+		<scope>test</scope>
+	</dependency>
+  </dependencies>
+
+  <build>
+    <finalName>crks-service</finalName>
+    <plugins>
+		<plugin>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>2.1</version>
+			<configuration>
+				<target>1.5</target>
+				<source>1.5</source>
+			</configuration>
+		</plugin>    	    
+    </plugins>
+  </build>  
+</project>

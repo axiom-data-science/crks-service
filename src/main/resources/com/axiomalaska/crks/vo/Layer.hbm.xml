@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.axiomalaska.crks.vo.Layer" table="layer" schema="crks">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="sequence">
+                <param name="sequence">layer_id_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="layerSubtype" class="com.axiomalaska.crks.vo.LayerSubtype" fetch="select">
+            <column name="layer_subtype_id" />
+        </many-to-one>
+        <many-to-one name="layerGroup" class="com.axiomalaska.crks.vo.LayerGroup" fetch="select">
+            <column name="layer_group_id" />
+        </many-to-one>
+        <many-to-one name="parameterType" class="com.axiomalaska.crks.vo.ParameterType" fetch="select">
+            <column name="parameter_type_id" />
+        </many-to-one>
+        <many-to-one name="parameter" class="com.axiomalaska.crks.vo.Parameter" fetch="select">
+            <column name="parameter_id" />
+        </many-to-one>
+        <many-to-one name="dataProvider" class="com.axiomalaska.crks.vo.DataProvider" fetch="select">
+            <column name="data_provider_id" />
+        </many-to-one>
+        <property name="label" type="string">
+            <column name="label" length="200" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="8000" />
+        </property>
+        <property name="complexSymbology" type="boolean">
+            <column name="complex_symbology" not-null="true" />
+        </property>
+        <property name="legendImageUrl" type="string">
+            <column name="legend_image_url" length="2000" />
+        </property>
+        <property name="dataUrl" type="string">
+            <column name="data_url" length="2000" />
+        </property>
+        <property name="metadataUrl" type="string">
+            <column name="metadata_url" length="2000" />
+        </property>
+        <property name="minLng" type="java.lang.Double">
+            <column name="min_lng" precision="17" scale="17" />
+        </property>
+        <property name="minLat" type="java.lang.Double">
+            <column name="min_lat" precision="17" scale="17" />
+        </property>
+        <property name="maxLng" type="java.lang.Double">
+            <column name="max_lng" precision="17" scale="17" />
+        </property>
+        <property name="maxLat" type="java.lang.Double">
+            <column name="max_lat" precision="17" scale="17" />
+        </property>
+        <property name="v1CatalogControlSourceUrl" type="string">
+            <column name="v1_catalog_control_source_url" length="2000" />
+        </property>
+        <property name="v1CatalogControlJsObject" type="string">
+            <column name="v1_catalog_control_js_object" length="500" />
+        </property>
+        <property name="itisTsn" type="java.lang.Integer">
+            <column name="itis_tsn" />
+        </property>
+        <property name="startTimeUtc" type="timestamp">
+            <column name="start_time_utc" length="29" />
+        </property>
+        <property name="endTimeUtc" type="timestamp">
+            <column name="end_time_utc" length="29" />
+        </property>
+        <property name="preferredEpsg" type="java.lang.Integer">
+            <column name="preferred_epsg" />
+        </property>
+        <property name="ZIndex" type="int">
+            <column name="z_index" not-null="true" />
+        </property>
+        <joined-subclass name="com.axiomalaska.crks.vo.DataLayer" table="data_layer" schema="crks">
+            <key column="id" />
+	        <property name="dataRequestUrl" type="string">
+	            <column name="data_request_url" length="1000" />
+	        </property>
+	        <property name="sensor" type="boolean">
+	            <column name="sensor" not-null="true" />
+	        </property>            
+        </joined-subclass>
+                
+        <joined-subclass name="com.axiomalaska.crks.vo.OgcLayer" table="ogc_layer" schema="crks">
+            <key column="id"/>
+	        <property name="ogcName" type="string">
+	            <column name="ogc_name" length="1000" />
+	        </property>
+	        <property name="wmsUrl" type="string">
+	            <column name="wms_url" length="500" />
+	        </property>
+	        <property name="wmsCacheUrl" type="string">
+	            <column name="wms_cache_url" length="2000" />
+	        </property>
+	        <property name="cacheExpirationSeconds" type="int">
+	            <column name="cache_expiration_seconds" not-null="true" />
+	        </property>
+	        <property name="nativeEpsg" type="int">
+	            <column name="native_epsg" not-null="true" />
+	        </property>
+	        <property name="defaultStyle" type="string">
+	            <column name="default_style" length="50" />
+	        </property>
+	        <property name="supportsGetLegendGraphic" type="boolean">
+	            <column name="supports_get_legend_graphic" not-null="true" />
+	        </property>
+	        <property name="googleMapsTileUrl" type="string">
+	            <column name="google_maps_tile_url" length="2000" />
+	        </property>
+	        <set name="supportedEpsgs" inverse="true">
+	            <key>
+	                <column name="ogc_layer_id" not-null="true" />
+	            </key>
+	            <one-to-many class="com.axiomalaska.crks.vo.SupportedEpsg" />
+	        </set>            
+	        <joined-subclass name="com.axiomalaska.crks.vo.VectorLayer" table="vector_layer" schema="crks">
+	           <key column="id"/>
+		        <property name="minDepth" type="java.lang.Integer">
+		            <column name="min_depth" />
+		        </property>
+		        <property name="maxDepth" type="java.lang.Integer">
+		            <column name="max_depth" />
+		        </property>
+		        <property name="timeProperty" type="string">
+		            <column name="time_property" length="100" />
+		        </property>
+		        <property name="sld" type="com.axiomalaska.crks.usertype.SQLXMLType">
+		            <column name="sld" />
+		        </property>	           
+	        </joined-subclass>
+	        <joined-subclass name="com.axiomalaska.crks.vo.RasterLayer" table="raster_layer" schema="crks">
+	           <key column="id"/>
+		        <many-to-one name="modelVariable" class="com.axiomalaska.crks.vo.ModelVariable" fetch="select">
+		            <column name="model_variable_id" />
+		        </many-to-one>
+		        <property name="wcsUrl" type="string">
+		            <column name="wcs_url" length="500" />
+		        </property>
+		        <set name="rasterTimeStratas" inverse="true">
+		            <key>
+		                <column name="raster_layer_id" not-null="true" />
+		            </key>
+		            <one-to-many class="com.axiomalaska.crks.vo.RasterTimeStrata" />
+		        </set>
+		        <set name="rasterElevationStratas" inverse="true">
+		            <key>
+		                <column name="raster_layer_id" not-null="true" />
+		            </key>
+		            <one-to-many class="com.axiomalaska.crks.vo.RasterElevationStrata" />
+		        </set>	           
+	        </joined-subclass>
+        </joined-subclass>
+    </class>
+</hibernate-mapping>

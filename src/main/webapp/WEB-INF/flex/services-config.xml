@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services-config>
+    <services>
+		<service id="crks-remoting-service"
+			class="flex.messaging.services.RemotingService">
+
+			<adapters>
+				<adapter-definition id="java-object" class="flex.messaging.services.remoting.adapters.JavaAdapter" default="true"/>
+			</adapters>
+
+			<default-channels>
+				<channel ref="crks-amf"/>
+			</default-channels>
+
+			<destination id="CrksService">
+				<properties>
+					<source>com.axiomalaska.crks.service.CrksService</source>
+				</properties>
+			</destination>			
+
+			<destination id="WfsProxy">
+				<properties>
+					<source>com.axiomalaska.crks.service.WfsProxy</source>
+				</properties>
+			</destination>			
+		  </service>
+	</services>
+
+
+    <channels>  
+        <channel-definition id="crks-amf" class="mx.messaging.channels.AMFChannel">
+            <endpoint url="http://{server.name}:{server.port}/{context.root}/messagebroker/amf" class="flex.messaging.endpoints.AMFEndpoint"/>
+            <properties>
+                <polling-enabled>false</polling-enabled>
+				<serialization>
+					<ignore-property-errors>false</ignore-property-errors>
+					<log-property-errors>true</log-property-errors>
+				</serialization>                
+            </properties>
+        </channel-definition>
+    </channels>
+
+    <logging>
+        <target class="flex.messaging.log.ConsoleTarget" level="Error">
+            <properties>
+                <prefix>[BlazeDS] </prefix>
+                <includeDate>false</includeDate>
+                <includeTime>false</includeTime>
+                <includeLevel>true</includeLevel>
+                <includeCategory>false</includeCategory>
+            </properties>
+            <filters>
+                <pattern>Endpoint.*</pattern>
+                <pattern>Service.*</pattern>
+                <pattern>Configuration</pattern>
+            </filters>
+        </target>
+    </logging>
+
+    <system>
+        <redeploy>
+            <enabled>true</enabled>
+            <watch-interval>20</watch-interval>
+            <watch-file>{context.root}/WEB-INF/flex/services-config.xml</watch-file>
+            <touch-file>{context.root}/WEB-INF/web.xml</touch-file>
+        </redeploy>
+    </system>
+
+</services-config>

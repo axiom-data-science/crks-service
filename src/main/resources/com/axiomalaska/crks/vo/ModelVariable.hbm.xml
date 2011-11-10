@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.axiomalaska.crks.vo.ModelVariable" table="model_variable" schema="crks">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="sequence">
+                <param name="sequence">model_variable_id_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="parameterType" class="com.axiomalaska.crks.vo.ParameterType" fetch="select">
+            <column name="parameter_type_id" />
+        </many-to-one>
+        <many-to-one name="parameter" class="com.axiomalaska.crks.vo.Parameter" fetch="select">
+            <column name="parameter_id" />
+        </many-to-one>
+        <many-to-one name="model" class="com.axiomalaska.crks.vo.Model" fetch="select">
+            <column name="model_id" not-null="true" />
+        </many-to-one>
+        <property name="variableName" type="string">
+            <column name="variable_name" length="100" />
+        </property>
+        <property name="label" type="string">
+            <column name="label" length="500" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="2000" />
+        </property>
+        <property name="unit" type="string">
+            <column name="unit" length="100" />
+        </property>
+        <property name="statsMin" type="java.lang.Double">
+            <column name="stats_min" precision="17" scale="17" />
+        </property>
+        <property name="statsMax" type="java.lang.Double">
+            <column name="stats_max" precision="17" scale="17" />
+        </property>
+        <property name="statsMean" type="java.lang.Double">
+            <column name="stats_mean" precision="17" scale="17" />
+        </property>
+        <property name="statsStdDev" type="java.lang.Double">
+            <column name="stats_std_dev" precision="17" scale="17" />
+        </property>
+        <property name="vector" type="boolean">
+            <column name="vector" not-null="true" />
+        </property>
+        <property name="statsN" type="long">
+            <column name="stats_n" not-null="true" />
+        </property>
+        <property name="statsSum" type="big_decimal">
+            <column name="stats_sum" precision="131089" scale="0" />
+        </property>
+        <property name="statsSquareSum" type="big_decimal">
+            <column name="stats_square_sum" precision="131089" scale="0" />
+        </property>
+        <property name="statsLastTimeSlice" type="timestamp">
+            <column name="stats_last_time_slice" length="29" />
+        </property>
+        <property name="normal" type="boolean">
+            <column name="normal" not-null="true" />
+        </property>
+        <set name="rasterLayers" inverse="true">
+            <key>
+                <column name="model_variable_id" />
+            </key>
+            <one-to-many class="com.axiomalaska.crks.vo.RasterLayer" />
+        </set>
+    </class>
+</hibernate-mapping>

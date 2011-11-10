@@ -1,0 +1,6 @@
+/build.properties
+/.project
+/.settings
+/.classpath
+/src/main/resources/hibernate.cfg.xml
+/target

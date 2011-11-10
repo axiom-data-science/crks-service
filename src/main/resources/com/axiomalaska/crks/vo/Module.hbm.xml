@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.axiomalaska.crks.vo.Module" table="module" schema="crks">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="sequence">
+                <param name="sequence">module_id_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="dataProvider" class="com.axiomalaska.crks.vo.DataProvider" fetch="select">
+            <column name="data_provider_id" />
+        </many-to-one>
+        <property name="label" type="string">
+            <column name="label" length="256" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" />
+        </property>
+        <property name="metadataUrl" type="string">
+            <column name="metadata_url" length="1000" />
+        </property>
+        <property name="v1ParentOfSelectables" type="boolean">
+            <column name="v1_parent_of_selectables" not-null="true" />
+        </property>
+        <property name="mutuallyExclusive" type="boolean">
+            <column name="mutually_exclusive" not-null="true" />
+        </property>
+        <property name="startTimeUtc" type="timestamp">
+            <column name="start_time_utc" length="29" />
+        </property>
+        <property name="endTimeUtc" type="timestamp">
+            <column name="end_time_utc" length="29" />
+        </property>
+        <property name="minLng" type="java.lang.Double">
+            <column name="min_lng" precision="17" scale="17" />
+        </property>
+        <property name="minLat" type="java.lang.Double">
+            <column name="min_lat" precision="17" scale="17" />
+        </property>
+        <property name="maxLng" type="java.lang.Double">
+            <column name="max_lng" precision="17" scale="17" />
+        </property>
+        <property name="maxLat" type="java.lang.Double">
+            <column name="max_lat" precision="17" scale="17" />
+        </property>
+        <property name="iconCode" type="string">
+            <column name="icon_code" length="200" />
+        </property>        
+        <set name="moduleStickyLayerGroups" inverse="true">
+            <key>
+                <column name="module_id" not-null="true" />
+            </key>
+            <one-to-many class="com.axiomalaska.crks.vo.ModuleStickyLayerGroup" />
+        </set>
+        <set name="portalModules" inverse="true">
+            <key>
+                <column name="module_id" not-null="true" />
+            </key>
+            <one-to-many class="com.axiomalaska.crks.vo.PortalModule" />
+        </set>
+        <set name="layerGroups" inverse="true">
+            <key>
+                <column name="module_id" not-null="true" />
+            </key>
+            <one-to-many class="com.axiomalaska.crks.vo.LayerGroup" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,41 @@
+<project name="deploy_crks_service">
+	<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" />
+	<taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" />
+	<property file="build.properties" />
+	
+	<target name="deploy-test">
+		<property name="tomcat.url" value="${build.test.tomcat.url}" />	
+		<property name="tomcat.user" value="${build.test.tomcat.user}" />
+		<property name="tomcat.pass" value="${build.test.tomcat.pass}" />
+		<property name="tomcat.path" value="${build.test.tomcat.path}" />
+		<antcall target="undeploy" />
+		<antcall target="deploy" />
+	</target>
+
+	<target name="deploy-live">
+		<property name="tomcat.url" value="${build.live.tomcat.url}" />	
+		<property name="tomcat.user" value="${build.live.tomcat.user}" />
+		<property name="tomcat.pass" value="${build.live.tomcat.pass}" />
+		<property name="tomcat.path" value="${build.live.tomcat.path}" />
+		<antcall target="undeploy" />
+		<antcall target="deploy" />
+	</target>
+	
+	<target name="undeploy">
+		<undeploy url="${tomcat.url}"
+		    failOnError="false"
+		    username="${tomcat.user}"
+		    password="${tomcat.pass}"
+		    path="${tomcat.path}"
+		/> 
+	</target>
+
+	<target name="deploy">
+		<deploy url="${tomcat.url}"
+		    username="${tomcat.user}"
+		    password="${tomcat.pass}"
+		    path="${tomcat.path}"
+		    war="target/crks-service.war"
+		/>		
+	</target>
+</project>

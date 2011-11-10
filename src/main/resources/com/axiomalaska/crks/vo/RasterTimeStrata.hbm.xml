@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.axiomalaska.crks.vo.RasterTimeStrata" table="raster_time_strata">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="sequence">
+                <param name="sequence">raster_time_strata_id_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="rasterLayer" class="com.axiomalaska.crks.vo.RasterLayer" fetch="select">
+            <column name="raster_layer_id" not-null="true" />
+        </many-to-one>
+        <property name="startTimeUtc" type="timestamp">
+            <column name="start_time_utc" length="29" not-null="true" />
+        </property>
+        <property name="endTimeUtc" type="timestamp">
+            <column name="end_time_utc" length="29" />
+        </property>
+        <property name="startTime" type="timestamp">
+            <column name="start_time" length="35" />
+        </property>
+        <property name="endTime" type="timestamp">
+            <column name="end_time" length="35" />
+        </property>
+    </class>
+</hibernate-mapping>

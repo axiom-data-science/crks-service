@@ -1,0 +1,16 @@
+Copper River Knowledge System - Java services
+
+This Java/BlazeDS webapp provides services and servlets that are used by
+the CRKS Flex client. The Java middleware connects to a backend PostgreSQL
+database and GeoServer.
+
+To install:
+* Copy src/main/resources/hibernate.cfg.xml.example to src/main/resources/hibernate.cfg.xml
+* Edit src/main/resources/hibernate.cfg.xml and update to match deployment:
+** hibernate.connection.url
+** hibernate.connection.username
+** hibernate.connection.password
+* Run mvn install
+* Copy build.properties.example to build.properties
+* Edit build.properties and update properties to match deployment
+* Run ant deploy-live (or deploy-test) 
