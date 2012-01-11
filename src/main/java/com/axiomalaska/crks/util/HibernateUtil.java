@@ -47,6 +47,10 @@ public class HibernateUtil {
 
     public static void closeSession() {
         Session s = threadSession.get();
+        if( s != null && s.getTransaction() != null && s.getTransaction().isActive() ){
+        	rollbackTransaction();
+        }
+        
         threadSession.set(null);
 
         if (s != null ){
